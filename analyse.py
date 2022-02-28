@@ -11,17 +11,42 @@ class NeteaseMusicAnalyse:
         self.content=json.loads(t)
     def _load_type(self,d):
         t=d['type']
-        if t==7: self.analyse_type7(d)
-    def analyse(self,index:int=0):
-        print(self.content)
+        if t==7: self.analyse_type7(d["data"])
+        elif t==1: self.analyse_type1(d["data"])
+    def analyse(self,index:int=2):
         d=self.content["reportFlowData"]["detail"][index]
         self._load_type(d)
     def _load_othertype_data(self,d):
         if "otherType" in d:
             for i in d['otherType']:
                 self._load_type(i)
+    def _second_format(self,s: str) -> str:
+            s=int(s)
+            m = s//60
+            ss = s % 60
+            hh = m//60
+            mm = m % 60
+
+            def fill_to_2(i: int) -> str:
+                s = str(i)
+                return s if len(s) == 2 else "0"*(2-len(s))+s
+            return f"{fill_to_2(hh)}:{fill_to_2(mm)}:{fill_to_2(ss)}"
+    def analyse_type1(self,d:dict):
+        print(f"关键词: {d['keyword']}")
+        print(f"这周听了 {d['listenSongs']} 首歌")
+        print(f"听了 {d['listenWeekCount']} 次, 共 {self._second_format(d['listenWeekTime'])}")
+        print("听歌时间表: ")
+        for i in d['details']:
+            print(f"    |{'-'*int(int(i['duration'])*2/60/60)}    {self._second_format(i['duration'])}")
+        print(f"这周开始听的歌是: {d['startSong']['songName']} - {d['startSong']['artistNames']}")
+        print(f"这周最后听的歌是: {d['endSong']['songName']} - {d['endSong']['artistNames']}")
+        print(f"这周最喜欢的{len(d['favoriteSongs'])}首歌: ")
+        for i in d['favoriteSongs']:
+            print(f"    {i['songName']} - {i['artistNames']}")
     def analyse_type7(self,d:dict):
         print(f"关键词: {d['keyword']}")
+        print(f"这周听了 {d['listenSongs']}首歌")
+        print(f"听了 {d['listenWeekCount']} 次, 共 {self._second_format(d['listenWeekTime'])}")
         print(f"听了 {d['listenAlbumInfo']['count']} 张专辑")
         for i in d["listenAlbumInfo"]["details"]:
             print(f"    {i['albumName']} 是你的{i['tag']}")
