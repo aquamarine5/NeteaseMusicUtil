@@ -13,7 +13,7 @@ class NeteaseMusicAnalyse:
         t=d['type']
         if t==7: self.analyse_type7(d["data"])
         elif t==1: self.analyse_type1(d["data"])
-    def analyse(self,index:int=2):
+    def analyse(self,index:int=0):
         d=self.content["reportFlowData"]["detail"][index]
         self._load_type(d)
     def _load_othertype_data(self,d):
@@ -42,6 +42,18 @@ class NeteaseMusicAnalyse:
         print(f"这周最后听的歌是: {d['endSong']['songName']} - {d['endSong']['artistNames']}")
         print(f"这周最喜欢的{len(d['favoriteSongs'])}首歌: ")
         for i in d['favoriteSongs']:
+            print(f"    {i['songName']} - {i['artistNames']}")
+        self._load_othertype_data(d)
+    def analyse_type4(self,d:dict):
+        print(f"关键词: {d['keyword']}")
+        print(f"这周听了 {d['listenSongs']}首歌")
+        print(f"听了 {d['listenWeekCount']} 次, 共 {self._second_format(d['listenWeekTime'])}")
+        # ignore d.listenStyleSongs
+        print(f"这周的听歌风格是 {d['styleName']}")
+        for i in d['secondStyleDataList']:
+            print(f"    {i['name']}: {i['song']['songName']}")
+        print("这周常听的歌有: ")
+        for i in d['songInfos']:
             print(f"    {i['songName']} - {i['artistNames']}")
     def analyse_type7(self,d:dict):
         print(f"关键词: {d['keyword']}")
@@ -74,6 +86,7 @@ class NeteaseMusicAnalyse:
         print("其次还有: ")
         for i in d['songInfos']:
             print(f"    {i['songName']} - {i['artistNames']}")
+        self._load_othertype_data(d)
 if __name__=="__main__":
     NeteaseMusicAnalyse(NeteaseMusicConfig.get_default_config()).analyse()
         
