@@ -9,7 +9,8 @@ from .record import NeteaseMusicRecord
 from .singer import NeteaseMusicSinger
 from .song import NeteaseMusicSong
 from .user import NeteaseMusicUser
-
+__package__="neteasemusic"
+__name__="neteasemusic"
 if __name__ == "__main__":
     cc = EasyCommandCompiler({
         0: {

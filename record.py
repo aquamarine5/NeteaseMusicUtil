@@ -1,10 +1,10 @@
 
 from typing import List
 
-from .config import NeteaseMusicConfig
 from .encrypt import NeteaseMusicEncrypt
 from .urls import *
 from .user import NeteaseMusicUser
+from .config import NeteaseMusicConfig
 from .webloader import NeteaseMusicWebLoader
 
 

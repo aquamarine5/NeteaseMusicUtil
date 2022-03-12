@@ -2,7 +2,7 @@
 from .AquaCore.config import BaseConfig, BaseConfigUser
 from .urls import *
 from .encrypt import NeteaseMusicEncrypt
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List
 NeteaseMusicBuffer: Dict[str, Any] = {}
 
 

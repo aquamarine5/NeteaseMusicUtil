@@ -3,6 +3,8 @@ import urllib.parse
 from base64 import b64encode
 from Crypto.Cipher import AES
 from .urls import *
+
+
 class NeteaseMusicEncrypt:
     @staticmethod
     def neteaseMusicEncrypt(content: str) -> str:
@@ -14,8 +16,8 @@ class NeteaseMusicEncrypt:
                 return text.encode('utf-8')
             a = AES.new(key, AES.MODE_CBC, iv=b'0102030405060708')
             return b64encode(a.encrypt(a16(message)))
-        asrsea0 = content
-        asrsea3 = "0CoJUm6Qyw8W8jud"
+        asrsea0 = str(content)
+        asrsea3 = "0CoJUm6Qyw8W8jud"  # static
         a_c = "GvuqQ2m9sizBbmo4"
         p = AES_encrypt(asrsea3.encode('utf-8'), asrsea0.encode('utf-8'))
         params = AES_encrypt(a_c.encode('utf-8'), p).decode('utf-8')
@@ -26,11 +28,13 @@ class NeteaseMusicEncrypt:
         print(NeteaseMusicEncrypt.neteaseMusicEncrypt(content))
 
     @classmethod
-    def neteaseMusicPost(cls, url: str, content: str, cookies=None) -> dict:
+    def neteaseMusicPost(cls, url: str, content: str, cookies=None, referer=None) -> dict:
         m = cls.neteaseMusicEncrypt(content)
         h = header.copy()
         if cookies != None:
             h["Cookie"] = cookies
+        if referer != None:
+            h['Referer'] = referer
         v = requests.post(
             url, cls.join(m), headers=h).json()
         return v
