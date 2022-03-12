@@ -1,3 +1,23 @@
 # NeteaseMusicUtil
 [![Code lines](https://img.shields.io/tokei/lines/github/aquamarine5/NeteaseMusicUtil)](https://github.com/aquamarine5/NeteaseMusicUtil)
 网易云音乐工具 下载音乐 分析听歌数据
+## .Album
+- 下载此专辑的全部歌曲
+## .Analyse
+- 使用[黑胶时光机](https://music.163.com/prime/m/viptimemachine)查看历史的听歌记录分析且无需黑胶Vip
+## .Encrypt
+- 对网易云Api的内容进行伪造加密
+## .Playlist
+- 下载此歌单的全部歌曲
+## .Record
+- 根据最近一周和历史听歌记录计算全部听歌时长，现推荐使用**.Analyse**
+## .Singer
+- 下载此歌手的全部热曲
+## .Song
+- 获取单首歌的详情
+- 下载歌曲
+## .User
+- 代表一个网易云用户
+- 获取累计登录时间
+- 通过账号密码或二维码扫描登录
+- 签到
