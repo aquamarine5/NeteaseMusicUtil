@@ -4,6 +4,8 @@
 ## .Album
 - 下载此专辑的全部歌曲
 ## .Analyse
+> ![1653202468_1_.jpg](https://s2.loli.net/2022/05/22/6uXZUTajChSw42s.png)
+> 有关作者的另外一个项目[NeteaseMusicTimeMachine](https://github.com/aquamarine5/NeteaseMusicTimeMachine)可以获取无需Cvip直接获取每周的黑胶时光机报告
 - 使用[黑胶时光机](https://music.163.com/prime/m/viptimemachine)查看历史的听歌记录分析且无需黑胶Vip
 ## .Encrypt
 - 对网易云Api的内容进行伪造加密
